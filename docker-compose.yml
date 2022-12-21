@@ -1,8 +1,9 @@
 services:
     nginx:
         build: conf.d
+        container_name: "nginx-proxy"
         volumes:
-            - ./nginx.conf:/etc/nginx/nginx.conf           
+            - ./conf.d/nginx.conf:/etc/nginx/nginx.conf           
         restart: unless-stopped
         ports:
             - 8083:81
