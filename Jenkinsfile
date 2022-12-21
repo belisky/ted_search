@@ -9,7 +9,7 @@ pipeline {
         stage("Build and Unit Tests") {
             steps {
                    withMaven(
-                    maven: 'maven:3.6.2',
+                    maven: 'maven3.6.2',
                     mavenLocalRepo: '.repository' 
                 ){
                 sh """
@@ -21,6 +21,11 @@ pipeline {
         stage ("E2E test"){
             steps {
                 sh "curl telnet://44.204.183.150:8083"
+            }
+        }
+        stage ("Destroy test Env") {
+            steps {
+                sh "docker compose down"
             }
         }
     }
