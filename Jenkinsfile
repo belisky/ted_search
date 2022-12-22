@@ -37,7 +37,7 @@ pipeline {
         }
         stage ("Start Prod EC2 Server") {
             steps {
-                sh "terraform init"
+                sh "terraform init -reconfigure"
                 sh "terraform workspace new tedsearch-${BUILD_NUMBER}"
                 sh "terraform apply --auto-approve"              
             }
