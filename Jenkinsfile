@@ -37,13 +37,18 @@ pipeline {
         }
         stage ("Start Prod EC2 Server") {
             steps {
+                  withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: "aws-cred",
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
            
                 sh "rm -rf .terraform"
                 sh "terraform init -reconfigure"
                 
                 sh "terraform apply --auto-approve"              
             
-        }}
+        }}}
     }
     post {
         always {
