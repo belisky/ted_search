@@ -14,7 +14,7 @@ pipeline {
                 ){
                 sh """
                 mvn verify
-                docker compose up -p ts
+                docker compose -p ts up 
                 """}
             }
         }
