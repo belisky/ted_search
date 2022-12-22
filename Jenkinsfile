@@ -15,26 +15,29 @@ pipeline {
                 sh """
                 cleanWs()
                 docker compose down                 
-                docker compose build --no-cache                
+                docker compose build --no-cache   
+                docker compose up -d --wait             
                 """
-                sh "docker compose up"}
+                
+                }
             }
         }
         stage ("E2E test"){
             steps {
-                sh" sleep 10"
-                sh "curl telnet://44.204.183.150:8083"
+                
+                echo "e2e test"
             }
         }
         stage ("Destroy test Env") {
             steps {
-                sh "docker compose down"
+                sh "destroying test env"
             }
         }
     }
     post {
         always {
-            sh "docker compose down"
+            cleanWs()
+            sh "docker compose down --remove-orphans"
          
         }
     }
