@@ -14,7 +14,7 @@ pipeline {
                 ){
                 sh """
                 cleanWs()
-                mvn verify
+                docker compose down                 
                 docker compose up 
                 """}
             }
