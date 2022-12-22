@@ -20,6 +20,7 @@ pipeline {
         }
         stage ("E2E test"){
             steps {
+                sh" sleep 10"
                 sh "curl telnet://44.204.183.150:8083"
             }
         }
@@ -27,6 +28,11 @@ pipeline {
             steps {
                 sh "docker compose down"
             }
+        }
+    }
+    post {
+        always {
+            sh "docker compose down"
         }
     }
 }
