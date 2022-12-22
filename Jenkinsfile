@@ -36,9 +36,11 @@ pipeline {
             }
         }
         stage ("Start Prod EC2 Server") {
+            withCredentials(crediential_)
             steps {
+                sh "rm -rf .terraform"
                 sh "terraform init -reconfigure"
-                sh "terraform workspace new tedsearch-${BUILD_NUMBER}"
+                
                 sh "terraform apply --auto-approve"              
             }
         }
@@ -49,7 +51,7 @@ pipeline {
             sh "docker compose down --remove-orphans"
             echo "taking down the terraform"
             sh """
-                    terraform workspace select tedsearch-${BUILD_NUMBER}
+                  
                     terraform destroy --auto-approve || true
                 """
             cleanWs()
