@@ -48,10 +48,10 @@ pipeline {
           
             sh "docker compose down --remove-orphans"
             echo "taking down the terraform"
-                script: '''
+            sh """
                     terraform workspace select tedsearch-${BUILD_NUMBER}
                     terraform destroy --auto-approve || true
-                '''
+                """
             cleanWs()
          
         }
