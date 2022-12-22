@@ -13,6 +13,7 @@ pipeline {
                     mavenLocalRepo: '.repository' 
                 ){
                 sh """
+                cleanWs()
                 mvn verify
                 docker compose up 
                 """}
