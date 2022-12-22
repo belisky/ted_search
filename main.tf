@@ -16,7 +16,7 @@ resource "aws_instance" "ec2" {
    }
 
      user_data       = file("install_docker.sh")
-  tags = var.tags
+   
 }
  
  
