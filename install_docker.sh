@@ -11,5 +11,4 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o 
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-cd /home/ubuntu/
-sudo docker compose -p ts up -d --wait
+ 
