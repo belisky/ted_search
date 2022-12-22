@@ -1,6 +1,6 @@
 resource "aws_instance" "ec2" { 
-  instance_type = var.instance_type
-  ami           = var.ami 
+  instance_type = "t2.micro"
+  ami           = "ami-0574da719dca65348" 
 
 
    provisioner "file" {
