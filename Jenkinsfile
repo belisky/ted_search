@@ -36,14 +36,14 @@ pipeline {
             }
         }
         stage ("Start Prod EC2 Server") {
-            withCredentials(crediential_)
             steps {
+            withCredentials([string(credientialId='aws-cred')]) {
                 sh "rm -rf .terraform"
                 sh "terraform init -reconfigure"
                 
                 sh "terraform apply --auto-approve"              
             }
-        }
+        }}
     }
     post {
         always {
