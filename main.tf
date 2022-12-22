@@ -4,16 +4,17 @@ resource "aws_instance" "ec2" {
 
      user_data       = file("install_docker.sh")
 
-   provisioner "file" {
-        source      = "docker-compose-ec2.yml"
-        destination = "/home/ubuntu/docker-compose.yml"
-       
     connection {
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file("/home/nobel_lavagna.pem")}"
       host        = "${self.public_ip}"
     }
+   provisioner "file" {
+        source      = "./docker-compose-ec2.yml"
+        destination = "/home/ubuntu/docker-compose.yml"
+       
+
    }
     provisioner "remote-exec" {
     inline = [
