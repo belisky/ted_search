@@ -15,9 +15,9 @@ pipeline {
                 sh """
                 cleanWs()
                 docker compose down                 
-                docker compose build --no-cache
-                docker compose up
-                """}
+                docker compose build --no-cache                
+                """
+                sh "docker compose up"}
             }
         }
         stage ("E2E test"){
