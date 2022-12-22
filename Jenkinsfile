@@ -36,8 +36,9 @@ pipeline {
     }
     post {
         always {
-            cleanWs()
+          
             sh "docker compose down --remove-orphans"
+            cleanWs()
          
         }
     }
