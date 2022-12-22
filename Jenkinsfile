@@ -2,7 +2,9 @@ pipeline {
     agent any
      tools {
         maven 'maven3.6.2'
-        jdk 'jdk_8'
+        jdk 'jdk_8'         
+        terraform "terraform11"
+    
     }
 
     stages {
@@ -15,8 +17,8 @@ pipeline {
                 sh """
                 cleanWs()
                 docker compose down                 
-                docker compose build --no-cache   
-                docker compose up -d --wait             
+                docker compose -p ts build --no-cache   
+                docker compose -p ts up -d --wait             
                 """
                 
                 }
@@ -25,12 +27,19 @@ pipeline {
         stage ("E2E test"){
             steps {
                 
-                echo "e2e test"
+                sh "curl telnet://44.204.183.150:8083/"
             }
         }
-        stage ("Destroy test Env") {
+        stage ("Deploy Images To ECR") {
             steps {
-                sh "destroying test env"
+                sh "./push2ecr.sh"
+            }
+        }
+        stage ("Start Prod EC2 Server") {
+            steps {
+                sh "terraform init"
+                sh "terraform workspace new tedsearch-${BUILD_NUMBER}"
+                sh "terraform apply --auto-approve"              
             }
         }
     }
@@ -38,6 +47,11 @@ pipeline {
         always {
           
             sh "docker compose down --remove-orphans"
+            echo "taking down the terraform"
+                script: '''
+                    terraform workspace select tedsearch-${BUILD_NUMBER}
+                    terraform destroy --auto-approve || true
+                '''
             cleanWs()
          
         }

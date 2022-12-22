@@ -1,17 +1,17 @@
 services:
     ted_nginx:
-        build: conf.d
+        image: 644435390668.dkr.ecr.us-east-1.amazonaws.com/nobel_ted_nginx:latest
         container_name: "nginx-proxy"          
         restart: unless-stopped
         ports:
             - "8083:81"
         networks:
-            - ts      
+            - ts    
 
     #memcached
 
     ted_search:
-        build: .
+        image: 644435390668.dkr.ecr.us-east-1.amazonaws.com/nobel_tedsearch:latest
         container_name: "tedsearch"
         ports: 
             - "8084:9191"
