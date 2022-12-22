@@ -76,7 +76,7 @@
             <resource>
                 <directory>${project.basedir}/src/main/resources</directory>
                 <excludes>
-                    <exclude>**/static/**</exclude>
+                    <exclude>static/**</exclude>
                 </excludes>
             </resource>
         </resources> 
@@ -84,13 +84,22 @@
                 <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.7</version>
+                <version>1.4.13</version>
+                     <executions>
+                    <execution>
+                    <id>default</id>
+                    <goals>
+                        <goal>build</goal>                       
+                    </goals>
+                    </execution>
+                </executions>
                 <configuration>
-
-                    <imageName>${project.artifactId}</imageName>
-                    <repository>${project.artifactId}</repository>
-                    <tag>${project.version}</tag>
+                    <imageName>ted-search</imageName>
+                    <repository>ted_search</repository>
+                    <tag>latest</tag>
                     <baseImage>java</baseImage>
+                    <buildArgs>
+                    <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
 
                     <resources>
                     <resource>
@@ -99,7 +108,7 @@
                         <include>${project.build.finalName}.jar</include>
                     </resource>
                     </resources>
-                    
+                    </buildArgs>
                 </configuration>
             </plugin>
             <plugin>

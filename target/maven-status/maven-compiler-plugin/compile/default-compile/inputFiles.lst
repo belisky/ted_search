@@ -1,0 +1,7 @@
+/usr/src/mymaven/src/main/java/com/develeap/course/embedash/beans/TedTalk.java
+/usr/src/mymaven/src/main/java/com/develeap/course/embedash/beans/TEDRepo.java
+/usr/src/mymaven/src/main/java/com/develeap/course/embedash/configuration/CacheConfiguration.java
+/usr/src/mymaven/src/main/java/com/develeap/course/embedash/services/SummaryProvider.java
+/usr/src/mymaven/src/main/java/com/develeap/course/embedash/EmbedashApplication.java
+/usr/src/mymaven/src/main/java/com/develeap/course/embedash/CustomCacheErrorHandler.java
+/usr/src/mymaven/src/main/java/com/develeap/course/embedash/configuration/TTConfig.java

@@ -4,7 +4,7 @@ services:
         container_name: "nginx-proxy"          
         restart: unless-stopped
         ports:
-            - 8083:81
+            - "8083:81"
         networks:
             - ts      
 
@@ -14,7 +14,7 @@ services:
         build: .
         container_name: "tedsearch"
         ports: 
-            - 8084:9191
+            - "8084:9191"
         networks: 
             - ts   
     
