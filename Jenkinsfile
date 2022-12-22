@@ -33,6 +33,10 @@ pipeline {
     post {
         always {
             sh "docker compose down"
+            sh "docker stop tedsearch"
+            sh "docker rm tedsearch"
+            sh "docker stop nginx-proxy"
+            sh " docker rm ningx-proxy"
         }
     }
 }
