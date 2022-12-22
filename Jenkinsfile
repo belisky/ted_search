@@ -15,7 +15,8 @@ pipeline {
                 sh """
                 cleanWs()
                 docker compose down                 
-                docker compose up 
+                docker compose build --no-cache
+                docker compose up
                 """}
             }
         }
