@@ -13,7 +13,7 @@ pipeline {
                     mavenLocalRepo: '.repository' 
                 ){
                 sh """
-                // mvn verify
+                
                 docker compose up 
                 """}
             }
