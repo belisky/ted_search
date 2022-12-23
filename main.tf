@@ -20,6 +20,9 @@ resource "aws_instance" "ec2" {
       private_key = file("/home/nobel_lavagna.pem")
       host        = self.public_ip
     }
+   provisioner "local-exec" {
+    command = "echo ${self.public_ip} >> public_ip.txt"
+  }
    provisioner "file" {
         source      = "./docker-compose-ec2.yml"
         destination = "/home/ubuntu/docker-compose.yml"

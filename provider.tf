@@ -6,6 +6,12 @@ terraform {
     }
   }
   required_version = ">= 0.13"
+  backend "s3" {
+    bucket = "nobel-tf-state-bucket"
+    key="ted_search.tfstate"
+    region="us-east-1"
+
+  }
  
 }
 

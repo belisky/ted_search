@@ -44,10 +44,17 @@ pipeline {
                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
            
                 sh "rm -rf .terraform"
-                sh "terraform init -reconfigure"                
+                sh "terraform init -reconfigure"  
+                sh "terraform workspace new tedsearch-${BUILD_NUMBER}"              
                 sh "terraform apply --auto-approve"              
             
         }}}
+            stage ("Smoke Tests") {
+            steps {
+                sh "ip=$(head -n 1 public_ip.txt)"
+                sh "curl telnet://${ip}:8083"
+            }
+        }
     }
     post {
         always {
@@ -55,9 +62,10 @@ pipeline {
             sh "docker compose down --remove-orphans"
             echo "taking down the terraform"
             sh """
-                  
-                 hurrayyy
-                """
+            terraform workspace select tedsearch-${BUILD_NUMBER}
+            terraform destroy --auto-approve || true
+            """
+             
             cleanWs()
          
         }
