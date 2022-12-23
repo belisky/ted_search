@@ -3,7 +3,7 @@ resource "aws_instance" "ec2" {
   key_name="nobel_lavagna"
   ami           = "ami-0574da719dca65348" 
 
-    user_data       = file("./install_d.txt")
+    user_data       = file("install_docker.sh")
     vpc_security_group_ids = ["${aws_security_group.sg.id}"] 
 
     connection {
@@ -21,6 +21,7 @@ resource "aws_instance" "ec2" {
     inline = [
 
       "cd /home/ubuntu",
+      "sudo docker --version",
       "sudo docker compose -p ts up -d --wait",
     ]
 
