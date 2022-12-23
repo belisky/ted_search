@@ -27,7 +27,7 @@ pipeline {
         stage ("E2E test"){
             steps {
                 
-                sh "curl telnet://44.204.183.150:8083/"
+                sh "curl telnet://52.205.252.207:8083"
             }
         }
         stage ("Deploy Images To ECR") {
