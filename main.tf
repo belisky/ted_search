@@ -2,7 +2,7 @@ data "aws_iam_role" "ecr_role" {
   name = "nobel_ECR_EC2" //name of the role in aws
 }
 resource "aws_iam_instance_profile" "iam" {
-  name = "Iam"
+  name = "Nobel-Iam"
   role = data.aws_iam_role.ecr_role.name
 }
 resource "aws_instance" "ec2" { 
