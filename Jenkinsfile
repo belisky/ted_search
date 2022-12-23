@@ -44,7 +44,7 @@ pipeline {
                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){
            
  
-                sh "terraform init -reconfigure --auto-approve"  
+                sh "terraform init " 
                 sh "terraform workspace new tedsearch-${BUILD_NUMBER}"              
                 sh "terraform apply --auto-approve"              
             
