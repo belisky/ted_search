@@ -21,13 +21,11 @@ resource "aws_instance" "ec2" {
     inline = [
 
       "cd /home/ubuntu",
-      "sudo apt-get update",
-      "sudo apt-get install ca-certificates curl gnupg lsb-release -y",
-      "sudo mkdir -p /etc/apt/keyrings -y",
-      "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker. -y ",
-      "sudo chmod a+r /etc/apt/keyrings/docker.gpg",
-      "sudo apt-get update -qq",
-      "sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y",
+      "ls -la",
+      "RUN apt-get update -qq && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common",
+      "RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - ",
+      "RUN add-apt-repository deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable",
+      "RUN apt-get update -qq && apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-compose -y",       
       "sudo docker --version",       
       "sudo docker compose -p ts up -d --wait",
     ]
