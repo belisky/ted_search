@@ -3,7 +3,7 @@ resource "aws_instance" "ec2" {
   key_name="nobel_lavagna"
   ami           = "ami-0574da719dca65348" 
 
-     user_data       = file("install_docker.sh")
+    user_data       = file("./install_d.txt")
     vpc_security_group_ids = ["${aws_security_group.sg.id}"] 
 
     connection {
@@ -19,6 +19,7 @@ resource "aws_instance" "ec2" {
    }
     provisioner "remote-exec" {
     inline = [
+
       "cd /home/ubuntu",
       "sudo docker compose -p ts up -d --wait",
     ]
