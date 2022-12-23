@@ -1,3 +1,10 @@
+data "aws_iam_role" "ecr_role" {
+  name = "nobel_ECR_EC2" //name of the role in aws
+}
+resource "aws_iam_instance_profile" "iam" {
+  name = "Iam"
+  role = data.aws_iam_role.ecr_role.name
+}
 resource "aws_instance" "ec2" { 
   instance_type = "t2.micro"
   key_name="nobel_lavagna"
@@ -36,13 +43,7 @@ resource "aws_instance" "ec2" {
 
     }
 }
-data "aws_iam_role" "ecr_role" {
-  name = "nobel_ECR_EC2" //name of the role in aws
-}
-resource "aws_iam_instance_profile" "iam" {
-  name = "Iam"
-  role = data.aws_iam_role.ecr_role.name
-}
+
 resource "aws_security_group" "sg" {
   name        = "webSG"
   description = "Allow ssh  inbound traffic"
