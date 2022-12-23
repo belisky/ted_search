@@ -52,7 +52,7 @@ pipeline {
             stage ("Smoke Tests") {
             steps {
                 sh """
-                ip="$(head -n 1 public_ip.txt)"
+                ip="${(head -n 1 public_ip.txt)}"
                 curl telnet://${ip}:8083
                 """
             }
