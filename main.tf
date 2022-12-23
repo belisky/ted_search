@@ -22,12 +22,15 @@ resource "aws_instance" "ec2" {
 
       "cd /home/ubuntu",
       "ls -la",
-      "sudo apt-get update -qq && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common",
-      "sudo curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - ",
-      "sudo add-apt-repository deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable",
-      "sudo apt-get update -qq && apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-compose -y",       
-      "sudo docker --version",       
-      "sudo docker compose -p ts up -d --wait",
+      " sudo apt-get install -y ca-certificates curl gnupg lsb-release",
+       "sudo mkdir -p /etc/apt/keyrings",
+      "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg",
+       "echo 'deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable' | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null",
+       "sudo apt-get update", 
+       "sudo chmod a+r /etc/apt/keyrings/docker.gpg",  
+       "sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y",
+       "sudo docker --version",       
+       "sudo docker compose -p ts up -d --wait",
     ]
 
     }
