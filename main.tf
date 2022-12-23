@@ -49,7 +49,7 @@ resource "aws_instance" "ec2" {
 }
 
 resource "aws_security_group" "sg" {
-  name        = "webSG"
+  name        = "nobel-sg"
   description = "Allow ssh  inbound traffic"
 
   ingress {
