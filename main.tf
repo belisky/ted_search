@@ -9,7 +9,7 @@ resource "aws_instance" "ec2" {
   instance_type = "t2.micro"
   key_name="nobel_lavagna"
   ami           = "ami-0574da719dca65348" 
-  iam_instance_profile = aws_iam_instance_profile.ecr_profile.name
+  iam_instance_profile = aws_iam_instance_profile.iam.name
 
     user_data       = "${file("install_docker.sh")}"
     vpc_security_group_ids = ["${aws_security_group.sg.id}"] 
