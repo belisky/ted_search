@@ -20,7 +20,7 @@ resource "aws_instance" "ec2" {
     provisioner "remote-exec" {
     inline = [
       "cd /home/ubuntu",
-      "sudo docker-compose -p ts up -d --wait",
+      "sudo docker compose -p ts up -d --wait",
     ]
 
     }
