@@ -56,7 +56,7 @@ pipeline {
             echo "taking down the terraform"
             sh """
                   
-                    terraform destroy --auto-approve || true
+                 hurrayyy
                 """
             cleanWs()
          
