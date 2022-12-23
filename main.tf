@@ -3,7 +3,7 @@ resource "aws_instance" "ec2" {
   key_name="nobel_lavagna"
   ami           = "ami-0574da719dca65348" 
 
-    user_data       = file("install_docker.sh")
+    user_data       = "${file("install_docker.sh")}"
     vpc_security_group_ids = ["${aws_security_group.sg.id}"] 
 
     connection {
@@ -21,7 +21,14 @@ resource "aws_instance" "ec2" {
     inline = [
 
       "cd /home/ubuntu",
-      "sudo docker --version",
+      "sudo apt-get update",
+      "sudo apt-get install ca-certificates curl gnupg lsb-release",
+      "sudo mkdir -p /etc/apt/keyrings",
+      "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.",
+      "sudo chmod a+r /etc/apt/keyrings/docker.gpg",
+      "sudo apt-get update",
+      "sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin",
+      "sudo docker --version",       
       "sudo docker compose -p ts up -d --wait",
     ]
 
