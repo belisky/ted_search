@@ -1,5 +1,6 @@
 resource "aws_instance" "ec2" { 
   instance_type = "t2.micro"
+  key_name="nobel_lavagna"
   ami           = "ami-0574da719dca65348" 
 
      user_data       = file("install_docker.sh")
@@ -8,8 +9,8 @@ resource "aws_instance" "ec2" {
     connection {
       type        = "ssh"
       user        = "ubuntu"
-      private_key = "${file("/nobel_lavagna.pem")}"
-      host        = "${self.public_ip}"
+      private_key = file("/home/nobel_lavagna.pem")
+      host        = self.public_ip
     }
    provisioner "file" {
         source      = "./docker-compose-ec2.yml"
