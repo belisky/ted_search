@@ -37,8 +37,8 @@ resource "aws_instance" "ec2" {
       "ls -la",
       "chmod a+x install_docker.sh",
       "./install_docker.sh", 
+      "sudo aws ecr get-login-password --region us-east-1 |sudo docker login --username AWS --password-stdin 644435390668.dkr.ecr.us-east-1.amazonaws.com",
       "sudo docker --version", 
-      "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 644435390668.dkr.ecr.us-east-1.amazonaws.com",
        "sudo docker compose -p ts up -d --wait",
     ]
 
