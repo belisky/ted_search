@@ -16,20 +16,15 @@ pipeline {
                 ){
                 sh """
                 cleanWs()
-                docker compose down                 
-                docker compose -p ts build --no-cache   
-                docker compose -p ts up -d --wait             
+                docker compose down 
+                mvn verify                
+                docker compose -p ts build --no-cache                            
                 """
                 
                 }
             }
         }
-        stage ("E2E test"){
-            steps {
-                
-                sh "curl telnet://52.205.252.207:8083"
-            }
-        }
+      
         stage ("Deploy Images To ECR") {
             steps {
                 sh "./push2ecr.sh"
@@ -61,7 +56,7 @@ pipeline {
     post {
         always {
           
-            sh "docker compose down --remove-orphans"
+          
             echo "taking down the terraform"
             sh """
             terraform workspace select tedsearch-${BUILD_NUMBER}
