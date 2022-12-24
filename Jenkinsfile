@@ -48,7 +48,7 @@ pipeline {
             steps {
                 sh '''
                 ip="${head -n 1 public_ip.txt}"
-                curl telnet://${ip}:8083
+                curl telnet://"${ip}":8083
                 '''
             }
         }
